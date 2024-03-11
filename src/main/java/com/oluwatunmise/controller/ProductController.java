@@ -5,6 +5,7 @@ import com.oluwatunmise.service.ProductServiceImpl;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,8 +21,12 @@ public class ProductController {
   private ProductServiceImpl productService;
 
   @GetMapping("/{id}")
-  public Optional<Product> getProductById(@PathVariable String id) {
-    return productService.getProductById(id);
+  public ResponseEntity<Object> getProductById(@PathVariable String id) {
+    Optional<Product> product = productService.getProductById(id);
+    if (product.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("RECORD NOT FOUND");
+    }
+    return ResponseEntity.ok(product.get());
   }
 
   @GetMapping("")

@@ -11,7 +11,7 @@ import java.util.UUID;
 public class ProductRepository {
   ArrayList<Product> allProducts = new ArrayList<>();
   public Optional<Product> getProductById (String productId) {
-    return allProducts.stream().filter(product -> product.getId() == productId).findFirst();
+    return allProducts.stream().filter(product -> product.getId().equals(productId)).findFirst();
   }
 
   public ArrayList<Product> getAllProducts() {
