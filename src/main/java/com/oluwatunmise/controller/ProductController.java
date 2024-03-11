@@ -27,6 +27,7 @@ public class ProductController {
   @GetMapping("")
   public ArrayList<Product> getAllProducts() {
     System.out.println(environment.getProperty("APP_NAME"));
+    System.out.println("Updates Made");
     return productService.getAllProducts();
   }
 
