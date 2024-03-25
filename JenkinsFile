@@ -1,0 +1,21 @@
+pipeline {
+     agent {
+       docker { image 'adoptopenjdk:hotspot-focal' }
+     }
+
+     stages {
+        stage('Test') {
+           steps {
+             sh 'mvn --version'
+           }
+        }
+     }
+
+     stages {
+        stage('Build and Package') {
+           steps {
+             sh 'mvn --version'
+           }
+        }
+     }
+}

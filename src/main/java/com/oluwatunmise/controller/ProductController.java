@@ -21,12 +21,13 @@ public class ProductController {
   private ProductServiceImpl productService;
 
   @GetMapping("/{id}")
-  public ResponseEntity<Object> getProductById(@PathVariable String id) {
+  public ResponseEntity getProductById(@PathVariable String id) {
     Optional<Product> product = productService.getProductById(id);
-    if (product.isEmpty()) {
+    if (product.isPresent()) {
+      return ResponseEntity.ok(product.get());
+    } else {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("RECORD NOT FOUND");
     }
-    return ResponseEntity.ok(product.get());
   }
 
   @GetMapping("")
